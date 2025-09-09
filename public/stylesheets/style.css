@@ -11,6 +11,10 @@ body {
     background-color: #9ac2ef;
 }
 
+nav {
+    float: right;
+}
+
 .container {
     display: inline-grid;
     grid-template-columns: auto auto auto;
