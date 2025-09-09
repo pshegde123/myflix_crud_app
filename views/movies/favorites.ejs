@@ -13,6 +13,10 @@
     <ul>
         <% favoriteMovies.forEach(movie => { %>
           <li><%= movie.title %></li>
+          <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">
+            <input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" required>
+            <button type="submit">Delete Notes</button>
+          </form>          
         <% }); %>
     </ul>
   </body>

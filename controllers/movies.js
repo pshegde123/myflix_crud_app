@@ -122,4 +122,24 @@ router.post('/movie/:movieid', async (req, res) => {
   }
 });
 
+//DELETE - Remove a movie from user's favorites
+router.delete('/movie/:movieId', async (req, res) => { 
+  console.log("Delete movie id:", req.params);
+  try {
+    // Look up the user from req.session
+    const currentUser = await User.findById(req.session.user._id);
+    // Use the Mongoose .deleteOne() method to delete
+    // a favorite movie using the id supplied from req.params
+    currentUser.favoriteMovies.id(req.params.movieId).deleteOne();
+    // Save changes to the user
+    await currentUser.save();
+    // Redirect back to the foods index view
+    res.redirect(`/movies/showFavorites`);
+  } catch (error) {
+    // If any errors, log them and redirect back home
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
 module.exports = router;
