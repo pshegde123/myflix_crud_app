@@ -5,13 +5,13 @@ const movieSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  name: {
+  title: {
     type: String,
     required: true,
   },
   category: {
     type: String,
-    required: true,
+    required: false,
   },
   details:{
     type: String,
@@ -34,3 +34,5 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
+
+module.exports = User;

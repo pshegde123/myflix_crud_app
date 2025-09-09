@@ -63,6 +63,7 @@ router.get('/movie/:movieid', async (req, res) => {
       try{
         const {movieid} = req.params;
         const movieDetails = await fetchDetails(movieid);
+        //console.log('logged in user = ', req.session.user);
         res.render('movies/show.ejs', {
           user: req.session.user,
           movie_details: movieDetails,
@@ -71,5 +72,31 @@ router.get('/movie/:movieid', async (req, res) => {
         console.error(err);   
       }
     });       
+
+router.post('/movie/:movieid', async (req, res) => {
+  try {
+    // Look up the user from req.session
+    const currentUser = await User.findById(req.session.user._id);
+    //console.log("req.body:", req.body);
+    currentUser.favoriteMovies.push(req.body);
+    // Save changes to the user
+    await currentUser.save();
+    // Redirect back to the movies index view
+    try {
+        const {page} = req.query;
+        const data = await fetchMovies(page);
+        res.render('movies/index.ejs', {
+          user: req.session.user,
+          movies: data,          
+        });
+      } catch (err) {
+        console.error(err);
+      }
+  } catch (error) {
+    // If any errors, log them and redirect back home
+    console.log(error);
+    res.redirect('/');
+  }
+});
 
 module.exports = router;

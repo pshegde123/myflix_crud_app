@@ -1,14 +1,25 @@
-<!-- views/movies/show.ejs -->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/show.css" />
-    <title>Add to Favorites</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Add To Favorites</title>
   </head>
-  <body>    
-    <h1>Add To Favorites</h1>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Add To Favorites</h1>    
+    <div class="new-body">
+      <form action="/users/<%= user._id %>/foods" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required/>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" name="quantity" id="quantity" required min="1"/>
+      <!-- Add a submit button -->
+      <button type="submit">Add Item</button>
+    </form>
+    </div>
   </body>
 </html>

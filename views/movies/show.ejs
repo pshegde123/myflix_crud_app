@@ -6,13 +6,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/show.css" />
-    <title>Details</title>
+    <title>Details</title>    
   </head>
   <body>    
     <h1><%= movie_details.title%></h1>
     <p>Overview: <%= movie_details.overview %></p>
-    <button onclick="window.history.back()">Go Back</button>
-    <!--<button onclick="window.location.href='/<%= movie_details.id %>/new'">Add To Favorites</button>-->
-    <a href="/movies/movie/<%= movie_details.id %>/new">Add To Favorites</a>
+    <button onclick="window.history.back()">Go Back</button>    
+    <% if (user) { %>
+      <form action="/movies/movie/<%= movie_details.id %>" method="POST">
+        <input type="hidden" name="id" value="<%= movie_details.id %>">
+        <input type="hidden" name="title" value="<%= movie_details.title %>">
+        <input type="hidden" name="overview" value="<%= movie_details.overview %>">
+        <input name="notes" type="text" placeholder="Your notes here" required>
+        <button id="btnAddToFavorites" type="submit">Add To Favorites</button>
+      </form>
+      <!-- Alternative button implementation -->
+      <!-- <button id="btnAddToFavorites" onclick="window.location.href='/movies/movie/<%= movie_details.id %>/new'">Add To Favorites</button>-->
+    <% } %>
+    <!--<a href="/movies/movie/<%= movie_details.id %>/new">Add To Favorites</a>-->    
   </body>
 </html>
