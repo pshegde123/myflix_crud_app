@@ -9,6 +9,10 @@
     <title>Details</title>
   </head>
   <body>    
-    <h1><%= movie.title%></h1>
+    <h1><%= movie_details.title%></h1>
+    <p>Overview: <%= movie_details.overview %></p>
+    <button onclick="window.history.back()">Go Back</button>
+    <!--<button onclick="window.location.href='/<%= movie_details.id %>/new'">Add To Favorites</button>-->
+    <a href="/movies/movie/<%= movie_details.id %>/new">Add To Favorites</a>
   </body>
 </html>

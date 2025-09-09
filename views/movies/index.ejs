@@ -12,7 +12,7 @@
     <div class="container">      
         <% movies.forEach(movie => { %>
           <div>
-            <a href="/movies/movie/<%= movie.id %>">
+            <a href="movie/<%= movie.id %>">
               <strong><%= movie.title %></strong>  
             </a>
             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> poster" style="width:200px;height:auto;" />            
