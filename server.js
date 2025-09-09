@@ -42,7 +42,6 @@ app.get('/', (req, res) => {
   });
 });
 
-
 app.use('/movies/', moviesController);
 app.use(passUserToView);
 app.use('/auth', authController);

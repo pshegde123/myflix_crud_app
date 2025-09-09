@@ -38,4 +38,11 @@ router.get('/all', async (req, res) => {
       }
 });
 
+router.get('/movie/:movieid', async (req, res) => {
+    res.render('movies/show.ejs', {
+      user: req.session.user,
+      movie: { title: "Sample Movie Title" }, // Placeholder movie object
+    });
+       
+});
 module.exports = router;
