@@ -42,7 +42,8 @@ const fetchDetails = async (movieid) => {
     }
   };
 
-router.get('/all', async (req, res) => {
+//READ - List all the movies
+  router.get('/all', async (req, res) => {
   try {
         const {page} = req.query;
         const data = await fetchMovies(page);
@@ -55,10 +56,31 @@ router.get('/all', async (req, res) => {
       }
 });
 
+//READ -  List all the movies user has marked as favorite
+router.get('/showFavorites', async (req, res) => {
+  try {
+    // Look up the user from req.session
+    const currentUser = await User.findById(req.session.user._id);
+    // Render the favorites view, passing in the user's favorite movies
+    res.render('movies/favorites.ejs', {  
+      user: req.session.user,
+      favoriteMovies: currentUser.favoriteMovies
+    });
+  } 
+  catch (error) {
+    // If any errors, log them and redirect back home
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+
+//CREATE - Add a movie to favorites 
 router.get('/movie/:movieid/new', async (req, res) => {  
     res.send("Add to favorites - to be implemented");
   });
 
+//READ - Load details for the given movieid
 router.get('/movie/:movieid', async (req, res) => {    
       try{
         const {movieid} = req.params;
@@ -73,6 +95,7 @@ router.get('/movie/:movieid', async (req, res) => {
       }
     });       
 
+//POST - Add a movie to user's favorites
 router.post('/movie/:movieid', async (req, res) => {
   try {
     // Look up the user from req.session
