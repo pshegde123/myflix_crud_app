@@ -5,19 +5,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/show.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>Favorites</title>    
   </head>
   <body>    
+    <%- include('../partials/_navbar.ejs') %>
     <h1>List of favs</h1>        
     <ul>
         <% favoriteMovies.forEach(movie => { %>
-          <li><%= movie.title %></li>
+          <li><%= movie.title %></li>          
           <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">
-            <input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" required>
+            <input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" readonly>
             <button type="submit">Delete Notes</button>
           </form>          
+          <a href="/movies/movie/<%= movie.id %>/edit">
+            Edit Item
+          </a>
         <% }); %>
     </ul>
+    <button id="btnBack" onclick="window.history.back()">Back</button>
   </body>
 </html>

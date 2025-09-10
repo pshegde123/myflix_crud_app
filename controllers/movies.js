@@ -123,8 +123,7 @@ router.post('/movie/:movieid', async (req, res) => {
 });
 
 //DELETE - Remove a movie from user's favorites
-router.delete('/movie/:movieId', async (req, res) => { 
-  console.log("Delete movie id:", req.params);
+router.delete('/movie/:movieId', async (req, res) => {   
   try {
     // Look up the user from req.session
     const currentUser = await User.findById(req.session.user._id);
@@ -141,5 +140,36 @@ router.delete('/movie/:movieId', async (req, res) => {
     res.redirect('/');
   }
 });
+router.get('/movie/:movieId/edit', async (req, res) => {  
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const movie = currentUser.favoriteMovies.id(req.params.movieId);
+    res.render('movies/edit.ejs',{
+      user: req.session.user,
+      movie
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});   
+router.put('/movie/:movieId', async (req, res) => {
+  try {
+    // Find the user from req.session
+    const currentUser = await User.findById(req.session.user._id);
+    // Find the current pantry item from the id supplied by req.params
+    const movie = currentUser.favoriteMovies.id(req.params.movieId);
+    // Update the pantry item with the new data from the form
+    movie.set(req.body);
+    // Save the current user
+    await currentUser.save();
+    // Redirect back to the foods index view
+    res.redirect(`/movies/showFavorites`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
 
 module.exports = router;
