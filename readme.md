@@ -1,6 +1,7 @@
 # Myflix 
 ![Landing page](./landing_page.png)
-#### This is a simple Node JS based web app which I have built to to show basic CRUD operations.
+#### This is a simple Node JS based web app which I have built to to show basic CRUD operations. 
+#### App loads the popular movies data using the [The Movie Database](https://developer.themoviedb.org/docs/getting-started) API. The app supports the session based authentication and allows logged in users to save favorite movies, update notes , delete app operations. 
 
 ## Live Demo
 #### Check [here](https://myflix-ejs-7ead97899eae.herokuapp.com/) 
