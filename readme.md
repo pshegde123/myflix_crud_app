@@ -6,7 +6,7 @@
 ## Live Demo
 #### Check [here](https://myflix-ejs-7ead97899eae.herokuapp.com/) 
 
-#### Technologies Used
+## Technologies Used
 * Node JS
 * Embeded JavaScript (EJS) Templates
 * HTML/CSS
