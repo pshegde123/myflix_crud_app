@@ -29,8 +29,7 @@
               <div class="col-3">
                 <h3><%= movie.title %></h3>         
                 <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> poster" style="width:200px;height:auto;" />                        
-                <p>Overview: <%= movie.overview %></p>
-                <p>Popularity: <%= movie.popularity %></p>
+                <p>Overview: <%= movie.overview %></p>               
                 <p>Vote Average: <%= movie.vote_average %></p> 
                 <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">                  
                   <textarea id="notes" name="notes" rows="5" cols="50" class="bg-secondary text-white" readonly><%= movie.notes %></textarea><br>
