@@ -102,7 +102,7 @@ router.post('/movie/:movieid', async (req, res) => {
   try {
     // Look up the user from req.session
     const currentUser = await User.findById(req.session.user._id);
-    //console.log("req.body:", req.body);
+    console.log("req.body:", req.body);
     currentUser.favoriteMovies.push(req.body);
     // Save changes to the user
     await currentUser.save();

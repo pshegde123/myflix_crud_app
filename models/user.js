@@ -5,13 +5,15 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    required: false,
+  details: {
+    type: String,   
   },
-  details:{
+  poster:{
     type: String,
   },  
+  votes:{
+    type: Number,
+  },
   notes:{
     type: String,
   }

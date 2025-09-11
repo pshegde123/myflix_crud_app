@@ -29,7 +29,9 @@
           <form action="/movies/movie/<%= movie_details.id %>" method="POST">
             <input type="hidden" name="id" value="<%= movie_details.id %>">
             <input type="hidden" name="title" value="<%= movie_details.title %>">
-            <input type="hidden" name="overview" value="<%= movie_details.overview %>">
+            <input type="hidden" name="details" value="<%= movie_details.details %>">
+            <input type="hidden" name="poster" value="<%= movie_details.poster %>">
+            <input type="hidden" name="votes" value="<%= movie_details.votes %>">
             <!--<input name="notes" type="textarea" placeholder="Your notes here" required>-->
             <textarea id="notes" name="notes" rows="8" cols="50" placeholder="Enter your notes here..." value="<%= movie_details.notes %>"></textarea><br>
             <button id="btnAddToFavorites" type="submit">Add To Favorites</button>
