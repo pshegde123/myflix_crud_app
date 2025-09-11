@@ -27,4 +27,5 @@ App loads data using [The Movie Database](https://developer.themoviedb.org/docs/
 ## Next Steps
 * Implement 'Load More' functionality for the 'All Movies' page
 * Display genre and certification details for each movie
-* Fix styling issues on 'My Favorites' page.
+* Implement different Filter by operations - 'Filter by title', 'Filter by genre', 'Filter by release year' etc.
+* Fix styling issues on all the page.
