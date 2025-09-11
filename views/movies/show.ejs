@@ -5,24 +5,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/show.css" />
-    <title>Details</title>    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Details</title>  
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        width: 100vw;
+        background-color: #000000;
+        color: #fefcf4;
+      }
+    </style>  
   </head>
-  <body>    
-    <h1><%= movie_details.title%></h1>
-    <p>Overview: <%= movie_details.overview %></p>
-    <button onclick="window.history.back()">Go Back</button>    
-    <% if (user) { %>
-      <form action="/movies/movie/<%= movie_details.id %>" method="POST">
-        <input type="hidden" name="id" value="<%= movie_details.id %>">
-        <input type="hidden" name="title" value="<%= movie_details.title %>">
-        <input type="hidden" name="overview" value="<%= movie_details.overview %>">
-        <input name="notes" type="text" placeholder="Your notes here" required>
-        <button id="btnAddToFavorites" type="submit">Add To Favorites</button>
-      </form>
-      <!-- Alternative button implementation -->
-      <!-- <button id="btnAddToFavorites" onclick="window.location.href='/movies/movie/<%= movie_details.id %>/new'">Add To Favorites</button>-->
-    <% } %>
-    <!--<a href="/movies/movie/<%= movie_details.id %>/new">Add To Favorites</a>-->    
+  <body >    
+    <%- include('../partials/_navbar.ejs') %>    
+    <div class="container mt-4">
+        <h1 class="text-center"><%= movie_details.title%></h1>
+        <img src="https://image.tmdb.org/t/p/w500/<%= movie_details.poster_path %>" alt="<%= movie_details.title %> poster" style="width:200px;height:auto;" />                        
+        <p>Overview: <%= movie_details.overview %></p>
+        <p>Popularity: <%= movie_details.popularity %></p>
+        <p>Vote Average: <%= movie_details.popularity %></p>               
+        <% if (user) { %>
+          <form action="/movies/movie/<%= movie_details.id %>" method="POST">
+            <input type="hidden" name="id" value="<%= movie_details.id %>">
+            <input type="hidden" name="title" value="<%= movie_details.title %>">
+            <input type="hidden" name="overview" value="<%= movie_details.overview %>">
+            <!--<input name="notes" type="textarea" placeholder="Your notes here" required>-->
+            <textarea id="notes" name="notes" rows="8" cols="50" placeholder="Enter your notes here..." value="<%= movie_details.notes %>"></textarea><br>
+            <button id="btnAddToFavorites" type="submit">Add To Favorites</button>
+          </form>          
+          <% } %>    
+           <button onclick="window.history.back()">Go Back</button>    
+    </div>
   </body>
 </html>

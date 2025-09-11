@@ -2,25 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>All Movies</title>
+    <style>
+      body{
+        height: 100vh;
+        width: 100vw;
+        background-color: #000000;
+        color: #fefcf4;
+      }
+    </style>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>All Movies</h1>
+    <%- include('../partials/_navbar.ejs') %>    
+    <h1 class="text-center">All Movies</h1>
     <div class="container">      
-        <% movies.forEach(movie => { %>
-          <div>
-            <a href="movie/<%= movie.id %>">
-              <strong><%= movie.title %></strong>  
-            </a>
-            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> poster" style="width:200px;height:auto;" />            
-            <p>Release Date: <%= movie.release_date %></p>
+        <div class="row">
+           <% movies.forEach(movie => { %>
+          <div class="col-3 mb-2">
+            <div>
+              <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> poster" style="width:200px;height:auto;" />                        
+            </div>
+            <div>
+              <a href="movie/<%= movie.id %>">
+                <strong><%= movie.title %></strong>  
+              </a>
+            </div>
             <p>Rating: <%= movie.vote_average %></p>
           </div>
-      <% }) %>      
+          <% }) %>                    
+          </div>
+    <button>Load More</button>
     </div>
-    <button onclick="window.location.href='#'>More Movies</button>
   </body>
 </html>

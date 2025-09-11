@@ -6,12 +6,14 @@ const axios = require('axios');
 
 const User = require('../models/user.js');
 const token = process.env.ACCESS_TOKEN; 
+const url = 'https://api.themoviedb.org/3/discover/movie?api_key=4f59be08f8f326dbbcd0d07eab04829c&certification=PG&include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&vote_average.gte=8&with_original_language=en&page=1';
+//const url = 'https://api.themoviedb.org/3/movie/popular?api_key=4f59be08f8f326dbbcd0d07eab04829c&page=1&language=en-US'
 
 // Load data API from
 const fetchMovies = async (page) => {    
     try {
       let result;     
-      const response = await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=4f59be08f8f326dbbcd0d07eab04829c&page=1&language=en-US')
+      const response = await axios.get(url)
         .then((response) => {         
           //console.log('response.data.results:', response.data.results);
           result = response.data.results;

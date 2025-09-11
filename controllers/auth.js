@@ -19,9 +19,7 @@ router.get('/sign-out', (req, res) => {
 
 router.post('/sign-up', async (req, res) => {
   try {
-    // Check if the username is already taken
-    console.log("User = ",User);
-    console.log("username = ",req.body.username);
+    // Check if the username is already taken   
     const userInDatabase = await User.findOne({ username: req.body.username });
     if (userInDatabase) {
       return res.send('Username already taken.');

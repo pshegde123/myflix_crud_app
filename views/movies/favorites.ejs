@@ -5,24 +5,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Favorites</title>    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Favorites</title>   
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        width: 100vw;
+        background-color: #000000;
+        color: #fefcf4;
+      }
+    </style>   
   </head>
   <body>    
     <%- include('../partials/_navbar.ejs') %>
-    <h1>List of favs</h1>        
-    <ul>
-        <% favoriteMovies.forEach(movie => { %>
-          <li><%= movie.title %></li>          
-          <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">
-            <input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" readonly>
-            <button type="submit">Delete Notes</button>
-          </form>          
-          <a href="/movies/movie/<%= movie.id %>/edit">
-            Edit Item
-          </a>
-        <% }); %>
-    </ul>
-    <button id="btnBack" onclick="window.history.back()">Back</button>
+    <div class="container mt-4">
+      <h1 class="text-center">List of favs</h1>        
+      <% if(favoriteMovies.length === 0) { %>
+          <h4 class="text-center mt-4">Add movies to your collection</h4>
+        <% } else { %>      
+      <div class="row">
+            <% favoriteMovies.forEach(movie => { %>
+              <div class="col">
+                <h3><%= movie.title %></h3>                    
+                <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">
+                  <!--<input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" readonly>-->
+                  <textarea id="notes" name="notes" rows="5" cols="50" placeholder="Enter your notes here..." value="<%= movie.notes %>"></textarea><br>
+                  <button type="submit">Delete</button>
+                </form>          
+                <button class="btn"><a href="/movies/movie/<%= movie.id %>/edit">
+                  update  Notes
+                </a></button>                
+                </div>
+            <% }); %>
+        <% } %>
+      </div>
+      <div class="row justify-content-center">
+        <button id="btnBack" class="btn btn-secondary text-dark" onclick="window.history.back()">Back</button>
+      </div>      
+    </div>
   </body>
 </html>
