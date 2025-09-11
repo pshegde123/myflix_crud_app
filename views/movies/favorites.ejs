@@ -23,24 +23,27 @@
       <h1 class="text-center">List of favs</h1>        
       <% if(favoriteMovies.length === 0) { %>
           <h4 class="text-center mt-4">Add movies to your collection</h4>
-        <% } else { %>      
-      <div class="row">
+          <% } else { %>      
+        <div class="row">
             <% favoriteMovies.forEach(movie => { %>
               <div class="col">
-                <h3><%= movie.title %></h3>                    
-                <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">
-                  <!--<input name="notes" type="text" placeholder="Your notes here" value="<%= movie.notes %>" readonly>-->
-                  <textarea id="notes" name="notes" rows="5" cols="50" placeholder="Enter your notes here..." value="<%= movie.notes %>"></textarea><br>
+                <h3><%= movie.title %></h3>         
+                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> poster" style="width:200px;height:auto;" />                        
+                <p>Overview: <%= movie.overview %></p>
+                <p>Popularity: <%= movie.popularity %></p>
+                <p>Vote Average: <%= movie.vote_average %></p> 
+                <form action="/movies/movie/<%= movie.id %>?_method=DELETE" method="POST">                  
+                  <textarea id="notes" name="notes" rows="5" cols="50" class="bg-secondary text-white" readonly><%= movie.notes %></textarea><br>
                   <button type="submit">Delete</button>
                 </form>          
                 <button class="btn"><a href="/movies/movie/<%= movie.id %>/edit">
-                  update  Notes
+                  Update  Notes
                 </a></button>                
                 </div>
             <% }); %>
         <% } %>
       </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mt-4">
          <form action="/movies/all" method = "get">
             <button id="btnBack" class="btn btn-secondary text-dark">Go To All Movies</button>
          </form>        

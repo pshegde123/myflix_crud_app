@@ -32,7 +32,7 @@ const fetchDetails = async (movieid) => {
       let result;
       const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieid}?api_key=4f59be08f8f326dbbcd0d07eab04829c&language=en-US`)
         .then((response) => {
-          //console.log('movie details:', response.data);
+          //console.log('fetchdetails(), movie details:', response.data);
           result = response.data;
         })
         .catch((error) => {
@@ -63,6 +63,8 @@ router.get('/showFavorites', async (req, res) => {
   try {
     // Look up the user from req.session
     const currentUser = await User.findById(req.session.user._id);
+    //console.log("Favorite movies = ",currentUser.favoriteMovies);
+
     // Render the favorites view, passing in the user's favorite movies
     res.render('movies/favorites.ejs', {  
       user: req.session.user,
@@ -87,7 +89,8 @@ router.get('/movie/:movieid', async (req, res) => {
       try{
         const {movieid} = req.params;
         const movieDetails = await fetchDetails(movieid);
-        //console.log('logged in user = ', req.session.user);
+        //console.log('show.ejs, movie details = ', movieDetails);
+
         res.render('movies/show.ejs', {
           user: req.session.user,
           movie_details: movieDetails,
@@ -102,7 +105,7 @@ router.post('/movie/:movieid', async (req, res) => {
   try {
     // Look up the user from req.session
     const currentUser = await User.findById(req.session.user._id);
-    console.log("req.body:", req.body);
+    console.log("req.body xxx:", req.body);
     currentUser.favoriteMovies.push(req.body);
     // Save changes to the user
     await currentUser.save();
@@ -110,6 +113,7 @@ router.post('/movie/:movieid', async (req, res) => {
     try {
         const {page} = req.query;
         const data = await fetchMovies(page);
+
         res.render('movies/index.ejs', {
           user: req.session.user,
           movies: data,          

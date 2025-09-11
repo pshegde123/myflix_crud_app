@@ -5,13 +5,13 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  details: {
+  overview: {
     type: String,   
   },
-  poster:{
+  poster_path:{
     type: String,
   },  
-  votes:{
+  vote_average:{
     type: Number,
   },
   notes:{
